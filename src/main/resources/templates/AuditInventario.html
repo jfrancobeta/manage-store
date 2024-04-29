@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout/layout.html :: head">
+</head>
+<body>
+    <header th:replace="layout/layout.html :: header"></header>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>nombre</th>
+                <th>precio</th>
+                <th>codigo</th>
+                <th>detalles</th>
+                <th>cantidad</th>
+                <th>Fecha</th>
+                <th>Usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-primary" th:each="data : ${auditInventario}">
+                <td th:text="${data[0]}"></td>
+                <td th:text="${data[1]}"></td>
+                <td th:text="${data[2]}"></td>
+                <td th:text="${data[3]}"></td>
+                <td th:text="${data[4]}"></td>
+                <td th:text="${data[5]}"></td>
+                <td th:text="${data[6]}"></td>
+                <td th:text="${data[7]}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <footer th:replace="layout/layout.html :: footer"></footer>
+</body>
+</html>

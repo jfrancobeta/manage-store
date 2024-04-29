@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="layout/layout.html :: head"></head>
+  <body>
+    <header th:replace="layout/layout.html :: header">
+
+    </header>
+    <div class="container">
+      <h1 th:text="${titulo}"></h1>
+      <form th:action="@{/inventario/form}" th:object="${inventario}" method="post">
+        
+        <div class="form-group row">
+          <label class="col-sm-2 col-from-label">Nombre</label>
+          <div class="col-sm-6">
+            <input type="text" th:field="*{nombre}" class="form-control" />
+          </div>
+          <small
+            class="alert alert-danger row ml-1"
+            th:if="${#fields.hasErrors('nombre')}"
+            th:errors="*{nombre}"
+          ></small>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-from-label">codigo</label>
+            <div class="col-sm-6">
+              <input type="text" th:field="*{codigo}" class="form-control" />
+            </div>
+            <small
+              class="alert alert-danger row ml-1"
+              th:if="${#fields.hasErrors('codigo')}"
+              th:errors="*{codigo}"
+            ></small>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-from-label">precio</label>
+            <div class="col-sm-6">
+              <input type="text" th:field="*{precio}" class="form-control" />
+            </div>
+            <small
+              class="alert alert-danger row ml-1"
+              th:if="${#fields.hasErrors('precio')}"
+              th:errors="*{precio}"
+            ></small>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-from-label">Cantidad</label>
+            <div class="col-sm-6">
+              <input type="number" th:field="*{cantidad}" class="form-control" />
+            </div>
+            <small
+              class="alert alert-danger row ml-1"
+              th:if="${#fields.hasErrors('cantidad')}"
+              th:errors="*{cantidad}"
+            ></small>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-from-label">detalles</label>
+            <div class="col-sm-6">
+              <input type="text" th:field="*{detalles}" class="form-control" />
+            </div>
+            <small
+              class="alert alert-danger row ml-1"
+              th:if="${#fields.hasErrors('detalles')}"
+              th:errors="*{detalles}"
+            ></small>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-6">
+            <input type="submit" value="Crear Producto" class="btn btn-primary mt-3">
+            </div>
+        </div>
+
+
+      </form>
+    </div>
+    <footer th:replace="layout/layout.html :: footer"></footer>
+  </body>
+</html>

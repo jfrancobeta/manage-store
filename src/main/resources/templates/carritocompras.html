@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="layout/layout.html :: head"></head>
+
+  <body>
+    <header th:replace="layout/layout.html :: header"></header>
+
+    <form th:action="@{/carrito/formCompra}" th:object="${carrito}" method="post">
+      <div class="container">
+        <div>
+          <div>
+            <label for="productos" class="form-label mt-3">producto</label>
+            <select
+              class="form-select form-select-lg mb-3"
+              aria-label="Default select"
+              id="productos"
+              th:field="*{producto}"
+            >
+            <option th:value="null" selected>Producto</option>
+              <option
+                th:each="producto : ${productos}"
+                th:value="${producto.id}"
+                th:text="${producto.nombre}"
+              ></option>
+            </select>
+          </div>
+          <small
+            class="alert alert-danger row ml-1"
+            th:if="${errorProducto != null}"
+            th:text="${errorProducto}"
+          ></small>
+        </div>
+
+        <div class="mt-2">
+          <div>
+            <label for="cantidad" class="form-label">cantidad</label>
+            <input
+              class="form-control mb-3"
+              type="number"
+              th:field="*{cantidad}"
+              id="cantidad"
+              placeholder="Cantidad"
+            />
+          </div>
+          <small
+            class="alert alert-danger row ml-1"
+            th:if="${errorCantidad != null}"
+            th:text="${errorCantidad}"
+          ></small>
+        </div>
+
+        <div>
+          <div>
+            <label for="clientes" class="form-label mt-3">Cliente: </label>
+            <select
+              class="form-select form-select-lg"
+              id="clientes"
+              th:field="*{cliente}"
+              th:disabled="${clienteSeleccionado}"
+            >
+              <option th:value="null" selected>Cliente</option>
+              <option
+                th:each="cliente : ${clientes}"
+                th:value="${cliente.id}"
+                th:text="${cliente.cedula}"
+              ></option>
+            </select>
+
+            <a class="btn btn-info ml-4" th:href="@{/cliente/formClientes}"
+              >Agregar cliente</a
+            >
+          </div>
+          <small
+            class="alert alert-danger row ml-1 mt-2"
+            th:if="${errorCliente != null}"
+            th:text="${errorCliente}"
+          ></small>
+        </div>
+
+        <div class="mt-4">
+          <input type="submit" class="btn btn-success" value="Agregar" />
+          <a class="btn btn-primary ml-4" th:href="@{/carrito/finalizar}">Finalizar</a>
+        </div>
+      </div>
+    </form>
+
+    <br />
+    <div class="container">
+      <table class="table">
+        <thead>
+          <th>id</th>
+          <th>descripcion</th>
+          <th>cantidad</th>
+          <th>precio</th>
+        </thead>
+        <tbody>
+          <tr th:each="item : ${listaCarrito}">
+            <td th:text="${item.producto.id}"></td>
+            <td th:text="${item.producto.detalles}"></td>
+            <td th:text="${item.cantidad}"></td>
+            <td th:text="${item.producto.precio}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+  <footer th:replace="layout/layout.html :: footer"></footer>
+</html>

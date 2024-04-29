@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout/layout.html :: head">
+    <!-- Agregar la etiqueta meta viewport para hacer la página responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header th:replace="layout/layout.html :: header"></header>
+    <div class="container">
+        <h1 class="mt-4" th:text="${titulo}"></h1>
+        <a class="btn btn-primary mb-4" th:href="@{/cliente/formClientes}">Crear Cliente</a>
+        <div class="input-group mb-4">
+            <form class="form-inline" th:action="@{/cliente/listarclientes}" method="get">
+                <input class="form-control mr-sm-2" type="text" name="query" placeholder="Buscar por nombre o cédula" />
+                <button class="btn btn-primary" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Cédula</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.id}"></td>
+                        <td th:text="${cliente.nombre}"></td>
+                        <td th:text="${cliente.apellido}"></td>
+                        <td th:text="${cliente.cedula}"></td>
+                        <td th:text="${cliente.correo}"></td>
+                        <td th:text="${cliente.direccion}"></td>
+                        <td th:text="${cliente.telefono}"></td>
+                        <td>
+                            <a class="btn btn-primary" th:href="@{/cliente/editar/} + ${cliente.id}">Editar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer th:replace="layout/layout.html :: footer"></footer>
+</body>
+</html>

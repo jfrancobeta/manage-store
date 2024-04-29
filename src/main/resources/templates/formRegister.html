@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="layout/layout.html :: head"></head>
+  <body>
+    <header th:replace="layout/layout.html :: header">
+
+    </header>
+    <div class="container">
+      <h1 th:text="${titulo}"></h1>
+      <form th:action="@{/register/formRegister}" th:object="${usuario}" method="post">
+        
+        <div class="form-group row">
+          <label class="col-sm-2 col-from-label">Username</label>
+          <div class="col-sm-6">
+            <input type="text" th:field="*{username}" class="form-control" />
+          </div>
+          <small
+            class="alert alert-danger row ml-1"
+            th:if="${errorUser} != null"
+            th:text="${errorUser}"
+          ></small>
+          <small
+            class="alert alert-danger row ml-1"
+            th:if="${#fields.hasErrors('username')}"
+            th:errors="*{username}"
+          ></small>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-from-label">Password</label>
+            <div class="col-sm-6">
+              <input type="password" th:field="*{password}" class="form-control" />
+            </div>
+            <small
+              class="alert alert-danger row ml-1"
+              th:if="${#fields.hasErrors('password')}"
+              th:errors="*{password}"
+            ></small>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Roles</label>
+            <div class="col-sm-6">
+                <div class="btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-outline-primary">
+                        <input type="checkbox" name="rol" value="ROLE_ADMIN"> ADMIN
+                    </label>
+                    <label class="btn btn-outline-primary">
+                        <input type="checkbox" name="rol" value="ROLE_USER"> USER
+                    </label>
+                </div>
+            </div>
+            <small class="alert alert-danger row ml-1" th:if="${errorRol != null}" th:text="${errorRol}" >Selecciona uno o más roles.</small>
+        </div>
+
+
+          <div class="form-group">
+            <div class="col-sm-6">
+            <input type="submit" value="Crear Usuario" class="btn btn-primary mt-3">
+            </div>
+        </div>
+
+
+      </form>
+    </div>
+    <footer th:replace="layout/layout.html :: footer"></footer>
+  </body>
+</html>

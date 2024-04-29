@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout/layout.html :: head">
+    <!-- Agregar la etiqueta meta viewport para hacer la página responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header th:replace="layout/layout.html :: header"></header>
+<div class="container">
+    <h1 class="mt-4" th:text="${titulo}"></h1>
+    <div class="table-responsive mt-2">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Productos</th>
+                <th scope="col">Total</th>
+                <th scope="col">Fecha de Creación</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="factura : ${facturas}">
+                <th scope="row" th:text="${factura.key}"></th>
+                <td th:text="${factura.value.cliente.nombre}"></td>
+                <td>
+                    <ul>
+                        <li th:each="producto : ${factura.value.productos}" th:text="${producto.nombre}"></li>
+                    </ul>
+                </td>
+                <td th:text="${factura.value.total}"></td>
+                <td th:text="${factura.value.fechaCreacion}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer th:replace="layout/layout.html :: footer"></footer>
+</body>
+</html>
